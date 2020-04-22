@@ -15,8 +15,19 @@ public class HelloController {
     @Autowired
     private HelloService helloService;
 
+    /**
+     * 查找顺序：
+     * 1，视图路径
+     * 2，uri mapping
+     * 3，/error
+     * 4，错误页面
+     * @param req
+     * @param model
+     * @return
+     */
     @RequestMapping("/welcome")
-    public String test(HttpServletRequest req, Model model) {
+    public String welcome(HttpServletRequest req, Model model) {
+        // xss
         String name = req.getParameter("name");
         helloService.sayHello(name);
         model.addAttribute("name", name);

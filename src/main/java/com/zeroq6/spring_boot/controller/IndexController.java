@@ -15,9 +15,9 @@ public class IndexController {
         return "index";
     }
 
-    @RequestMapping("/test")
-    public String test(HttpServletRequest req) {
-        return "this is test";
+    @RequestMapping("/index")
+    public String index(HttpServletRequest req) {
+        return "this is index";
     }
 
 }
