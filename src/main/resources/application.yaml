@@ -1,0 +1,38 @@
+server:
+  port: 80
+
+# https://docs.spring.io/spring-boot/docs/2.2.6.RELEASE/reference/htmlsingle/#templating-properties
+spring:
+  freemarker:
+    cache: false
+    charset: UTF-8
+    enabled: true
+    suffix: .ftl # 在spring-boot-2.2.6中默认值是.ftlh，所以必须单独配置
+    template-loader-path: classpath:/templates/
+
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/spring_boot?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=GMT%2B8
+    username: root
+    password:
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true # 下划线转驼峰
+  mapper-locations: sqlmap/**/*Dao.xml
+  type-aliases-package: com.zeroq6.**.domain
+
+logging:
+  file:
+    name: spring_boot.log
+  level:
+    root: warn
+    com.zeroq6: debug
+
+#xss攻击拦截
+xss:
+  enabled: true
+  excludes:
+  urlPatterns: /*
+
+

@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zeroq6.spring_boot.dao.DictDao">
+
+    <sql id="TABLE_T"><![CDATA[dict t]]></sql>
+
+    <sql id="TABLE"><![CDATA[dict]]></sql>
+
+    <sql id="SELECT_COLUMN_LIST">
+        <![CDATA[
+            id AS id, /*主键*/
+            dict_type AS dictType, /*字典类型，1，分类，2，标签，3，链接，4，历史，5，社交，6，站点信息，7，系统配置*/
+            dict_key AS dictKey, /*字典键*/
+            dict_value AS dictValue, /*字典值*/
+            remark AS remark, /*备注*/
+            modified_time AS modifiedTime, /*修改时间*/
+            created_time AS createdTime, /*创建时间*/
+            yn AS yn /*是否有效，1，有效，0，无效*/
+        ]]>
+    </sql>
+
+    <sql id="WHERE_CLAUSE_SELECT">
+        WHERE yn = 1
+        <if test="id != null">
+            <![CDATA[AND id = #{id}]]> /*主键*/
+        </if>
+        <if test="dictType != null">
+            <![CDATA[AND dict_type = #{dictType}]]> /*字典类型，1，分类，2，标签，3，链接，4，历史，5，社交，6，站点信息，7，系统配置*/
+        </if>
+        <if test="dictKey != null">
+            <![CDATA[AND dict_key = #{dictKey}]]> /*字典键*/
+        </if>
+        <if test="dictValue != null">
+            <![CDATA[AND dict_value = #{dictValue}]]> /*字典值*/
+        </if>
+        <if test="remark != null">
+            <![CDATA[AND remark = #{remark}]]> /*备注*/
+        </if>
+        <if test="modifiedTime != null">
+            <![CDATA[AND modified_time = #{modifiedTime}]]> /*修改时间*/
+        </if>
+        <if test="createdTime != null">
+            <![CDATA[AND created_time = #{createdTime}]]> /*创建时间*/
+        </if>
+        <if test="extendMap!=null">
+            <if test="extendMap.dictKeyLike!= null and extendMap.dictKeyLike.trim() != ''">
+                <![CDATA[AND dict_key like '%' || #{extendMap.dictKeyLike} || '%']]> /*字典键*/
+            </if>
+            <if test="extendMap.dictValueLike!= null and extendMap.dictValueLike.trim() != ''">
+                <![CDATA[AND dict_value like '%' || #{extendMap.dictValueLike} || '%']]> /*字典值*/
+            </if>
+            <if test="extendMap.remarkLike!= null and extendMap.remarkLike.trim() != ''">
+                <![CDATA[AND remark like '%' || #{extendMap.remarkLike} || '%']]> /*备注*/
+            </if>
+            <if test="extendMap.modifiedTimeBegin!= null and extendMap.modifiedTimeBegin != ''">
+                <![CDATA[AND modified_time >= strftime('%Y-%m-%d %H:%M:%S',#{extendMap.modifiedTimeBegin})]]> /*修改时间开始*/
+            </if>
+            <if test="extendMap.modifiedTimeEnd!= null and extendMap.modifiedTimeEnd != ''">
+                <![CDATA[AND modified_time <= strftime('%Y-%m-%d %H:%M:%S',#{extendMap.modifiedTimeEnd})]]> /*修改时间结束*/
+            </if>
+            <if test="extendMap.createdTimeBegin!= null and extendMap.createdTimeBegin != ''">
+                <![CDATA[AND created_time >= strftime('%Y-%m-%d %H:%M:%S',#{extendMap.createdTimeBegin})]]> /*创建时间开始*/
+            </if>
+            <if test="extendMap.createdTimeEnd!= null and extendMap.createdTimeEnd != ''">
+                <![CDATA[AND created_time <= strftime('%Y-%m-%d %H:%M:%S',#{extendMap.createdTimeEnd})]]> /*创建时间结束*/
+            </if>
+            <if test="extendMap.idIn!= null">
+                <![CDATA[AND id in ]]>
+                <foreach item="item" index="index" collection="extendMap.idIn" open="(" separator="," close=")">
+                  #{item}
+                </foreach>
+            </if>
+            <if test="extendMap.dictTypeIn!= null">
+                <![CDATA[AND dict_type in ]]>
+                <foreach item="item" index="index" collection="extendMap.dictTypeIn" open="(" separator="," close=")">
+                  #{item}
+                </foreach>
+            </if>
+            <!--自定义开始 -->
+
+            <!--自定义结束 -->
+        </if>
+    </sql>
+
+    <sql id="WHERE_CLAUSE_UPDATE">
+        <!--如果extendMap或where为空，则mybatis解析表达式空指针，执行不了-->
+        WHERE yn = 1
+        <if test="extendMap.where.id!= null">
+            <![CDATA[AND id = #{extendMap.where.id}]]> /*主键*/
+        </if>
+        <if test="extendMap.where.dictType!= null">
+            <![CDATA[AND dict_type = #{extendMap.where.dictType}]]> /*字典类型，1，分类，2，标签，3，链接，4，历史，5，社交，6，站点信息，7，系统配置*/
+        </if>
+        <if test="extendMap.where.dictKey!= null">
+            <![CDATA[AND dict_key = #{extendMap.where.dictKey}]]> /*字典键*/
+        </if>
+        <if test="extendMap.where.dictValue!= null">
+            <![CDATA[AND dict_value = #{extendMap.where.dictValue}]]> /*字典值*/
+        </if>
+        <if test="extendMap.where.remark!= null">
+            <![CDATA[AND remark = #{extendMap.where.remark}]]> /*备注*/
+        </if>
+        <if test="extendMap.where.modifiedTime!= null">
+            <![CDATA[AND modified_time = #{extendMap.where.modifiedTime}]]> /*修改时间*/
+        </if>
+        <if test="extendMap.where.createdTime!= null">
+            <![CDATA[AND created_time = #{extendMap.where.createdTime}]]> /*创建时间*/
+        </if>
+        <!--自定义开始 -->
+
+        <!--自定义结束 -->
+    </sql>
+
+    <!-- 更新列字段,只要不为NULL则更新,除开主键列,创建时间,yn -->
+    <sql id="UPDATE_COLUMN_SET">
+        <set>
+            <if test="dictType!= null">
+                <![CDATA[ dict_type = #{dictType}]]> /*字典类型，1，分类，2，标签，3，链接，4，历史，5，社交，6，站点信息，7，系统配置*/,
+            </if>
+            <if test="dictKey!= null">
+                <![CDATA[ dict_key = #{dictKey}]]> /*字典键*/,
+            </if>
+            <if test="dictValue!= null">
+                <![CDATA[ dict_value = #{dictValue}]]> /*字典值*/,
+            </if>
+            <if test="remark!= null">
+                <![CDATA[ remark = #{remark}]]> /*备注*/,
+            </if>
+                <![CDATA[ modified_time = datetime(CURRENT_TIMESTAMP,'localtime')]]> /*修改时间*/,
+            <!--自定义开始 -->
+
+            <!--自定义结束 -->
+        </set>
+    </sql>
+
+
+    <!-- 智能排序与分页 -->
+    <sql id="QUERY_ORDER_LIMIT_CONDITION">
+        <!--自定义开始（GROUP BY） -->
+
+        <!--自定义结束 -->
+        <if test="orderField != null and orderField != '' and orderFieldType != null and orderFieldType != ''"><![CDATA[ORDER BY ${orderField} ${orderFieldType}]]></if>
+        <if test="orderField == null or orderField == '' or orderFieldType == null or orderFieldType == ''">
+        <!--自定义开始（ORDER BY） -->
+
+        <!--自定义结束 -->
+        </if>
+        <if test="startIndex != null and startIndex &gt;= 0 and pageSize != null and pageSize &gt; 0"><![CDATA[LIMIT #{startIndex},#{pageSize}]]></if>
+    </sql>
+
+
+    <sql id="INSERT_COLUMN"><if test="dictType != null">dict_type,</if><if test="dictKey != null">dict_key,</if><if test="dictValue != null">dict_value,</if><if test="remark != null">remark,</if>modified_time,created_time,yn</sql>
+
+    <sql id="INSERT_COLUMN_VALUES"><if test="dictType != null">#{dictType},</if><if test="dictKey != null">#{dictKey},</if><if test="dictValue != null">#{dictValue},</if><if test="remark != null">#{remark},</if>datetime(CURRENT_TIMESTAMP,'localtime'),datetime(CURRENT_TIMESTAMP,'localtime'),1</sql>
+
+    <insert id="insert" parameterType="com.zeroq6.spring_boot.domain.DictDomain">
+        INSERT INTO <include refid="TABLE"/>
+        (
+          <include refid="INSERT_COLUMN"/>
+        )
+        VALUES
+        (
+        <include refid="INSERT_COLUMN_VALUES"/>
+        )
+    </insert>
+
+    <insert id="insertFillingId" parameterType="com.zeroq6.spring_boot.domain.DictDomain" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO <include refid="TABLE"/>
+        (
+        <include refid="INSERT_COLUMN"/>
+        )
+        VALUES
+        (
+        <include refid="INSERT_COLUMN_VALUES"/>
+        )
+    </insert>
+
+    <insert id="insertBatch" parameterType="java.util.List">
+        INSERT INTO <include refid="TABLE"/>
+        (
+        dict_type,dict_key,dict_value,remark,modified_time,created_time,yn
+        )
+        VALUES
+        <foreach collection="list" index="index" item="item" separator=",">
+            (#{item.dictType},#{item.dictKey},#{item.dictValue},#{item.remark},datetime(CURRENT_TIMESTAMP,'localtime'),datetime(CURRENT_TIMESTAMP,'localtime'),1)
+        </foreach>
+
+    </insert>
+
+    <select id="selectByKey" parameterType="long" resultType="com.zeroq6.spring_boot.domain.DictDomain">
+        SELECT
+        <include refid="SELECT_COLUMN_LIST"/>
+        FROM
+        <include refid="TABLE"/>
+        WHERE yn = 1 AND id = #{id}
+    </select>
+
+    <select id="selectList" parameterType="com.zeroq6.spring_boot.domain.DictDomain" resultType="com.zeroq6.spring_boot.domain.DictDomain">
+        SELECT
+        <include refid="SELECT_COLUMN_LIST"/>
+        FROM
+        <include refid="TABLE"/>
+        <include refid="WHERE_CLAUSE_SELECT"/>
+        <include refid="QUERY_ORDER_LIMIT_CONDITION"/>
+    </select>
+
+    <select id="selectListCount" parameterType="com.zeroq6.spring_boot.domain.DictDomain" resultType="java.lang.Integer">
+        SELECT
+        count(1)
+        FROM
+        <include refid="TABLE"/>
+        <include refid="WHERE_CLAUSE_SELECT"/>
+    </select>
+
+    <update id="updateByKey" parameterType="com.zeroq6.spring_boot.domain.DictDomain" >
+        UPDATE <include refid="TABLE"/>
+        <include refid="UPDATE_COLUMN_SET"/>
+        WHERE yn = 1 AND id = #{id}
+    </update>
+
+    <update id="updateByCondition" parameterType="com.zeroq6.spring_boot.domain.DictDomain">
+        UPDATE <include refid="TABLE"/>
+        <include refid="UPDATE_COLUMN_SET"/>
+        <include refid="WHERE_CLAUSE_UPDATE"/>
+    </update>
+
+    <update id="disableByKey" parameterType="long">
+        UPDATE <include refid="TABLE"/>
+        SET yn = 0
+        WHERE yn = 1 AND id = #{_parameter}
+    </update>
+
+    <update id="disableByCondition" parameterType="com.zeroq6.spring_boot.domain.DictDomain">
+        UPDATE <include refid="TABLE"/>
+        SET yn = 0
+        <include refid="WHERE_CLAUSE_SELECT"/>
+    </update>
+
+
+    <!--系统生成结束,请勿修改,重新生成会覆盖 -->
+    <!--自定义开始 -->
+
+    <!--自定义结束 -->
+</mapper>
