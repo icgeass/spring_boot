@@ -7,7 +7,7 @@ spring:
     cache: false
     charset: UTF-8
     enabled: true
-    suffix: .ftl # 在spring-boot-2.2.6中默认值是.ftlh，所以必须单独配置
+    suffix: .ftl
     template-loader-path: classpath:/templates/
 
   datasource:
@@ -16,9 +16,14 @@ spring:
     username: root
     password:
 
+  dubbo:
+    application:
+      name: spring-boot-demo-dubbo-provider
+      registry: zookeeper://localhost:2181
+
 mybatis:
   configuration:
-    map-underscore-to-camel-case: true # 下划线转驼峰
+    map-underscore-to-camel-case: true
   mapper-locations: sqlmap/**/*Dao.xml
   type-aliases-package: com.zeroq6.**.domain
 
@@ -29,7 +34,6 @@ logging:
     root: warn
     com.zeroq6: debug
 
-#xss攻击拦截
 xss:
   enabled: true
   excludes:

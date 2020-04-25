@@ -1,11 +1,13 @@
 package com.zeroq6.spring_boot.provider;
 
 import com.zeroq6.spring_boot.api.DemoServiceApi;
+import org.apache.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 @Service
+@Component
 public class DemoServiceImpl implements DemoServiceApi {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
