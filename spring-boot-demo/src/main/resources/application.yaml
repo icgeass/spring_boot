@@ -16,10 +16,31 @@ spring:
     username: root
     password: 123456
 
-  dubbo:
-    application:
-      name: spring-boot-demo-dubbo-provider
-      registry: zookeeper://localhost:2181
+  # dubbo will use
+  application:
+    name: spring-boot-demo
+
+embedded:
+  zookeeper:
+    port: 2181
+
+dubbo:
+  registry:
+    address: zookeeper://127.0.0.1:${embedded.zookeeper.port}
+    file: ${user.home}/dubbo-cache/${spring.application.name}/dubbo.cache
+  protocol:
+    name: dubbo
+    port: -1
+  application:
+    name: ${spring.application.name}
+  scan:
+    base-packages: com.zeroq6.spring_boot.provider
+
+#
+demo:
+  service:
+    version: 1.0.0
+
 
 mybatis:
   configuration:

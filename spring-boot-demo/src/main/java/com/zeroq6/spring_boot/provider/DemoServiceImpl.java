@@ -4,10 +4,8 @@ import com.zeroq6.spring_boot.api.DemoServiceApi;
 import org.apache.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
-@Service
-@Component
+@Service(version = "${demo.service.version}")
 public class DemoServiceImpl implements DemoServiceApi {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());

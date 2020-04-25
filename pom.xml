@@ -6,10 +6,12 @@
     <artifactId>spring-boot</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>spring-boot</name>
+    <packaging>pom</packaging>
     <description>Demo project for Spring Boot</description>
 
     <modules>
         <module>spring-boot-demo</module>
+        <module>spring-boot-dubbo-consumer</module>
     </modules>
     <properties>
         <!---->
@@ -31,6 +33,13 @@
 
     <dependencyManagement>
         <dependencies>
+            <!--项目内版本控制-->
+            <dependency>
+                <groupId>com.zeroq6</groupId>
+                <artifactId>spring-boot-demo</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
             <dependency>
                 <!-- Import dependency management from Spring Boot -->
                 <groupId>org.springframework.boot</groupId>
@@ -48,11 +57,6 @@
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>${mybatis.spring.boot.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>${mysql.version}</version>
             </dependency>
             <!--工具类-->
             <dependency>
@@ -74,6 +78,15 @@
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
                     <version>${spring.boot.version}</version>
+                </plugin>
+                <!--http://maven.apache.org/surefire/maven-surefire-plugin/examples/skipping-test.html-->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.18.1</version>
+                    <configuration>
+                        <skip>true</skip>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>

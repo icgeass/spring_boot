@@ -1,0 +1,27 @@
+server:
+  port: 8001
+  servlet:
+    context-path:
+
+# https://github.com/apache/dubbo/issues/4657, see https://github.com/apache/dubbo-spring-boot-project demo project
+spring:
+  application:
+    name: spring-boot-dubbo-consumer
+
+embedded:
+  zookeeper:
+    port: 2181
+
+dubbo:
+  registry:
+    address: zookeeper://127.0.0.1:${embedded.zookeeper.port}
+    file: ${user.home}/dubbo-cache/${spring.application.name}/dubbo.cache
+  protocol:
+    name: dubbo
+    port: -1
+  application:
+    name: ${spring.application.name}
+
+demo:
+  service:
+    version: 1.0.0
