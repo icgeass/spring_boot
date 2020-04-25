@@ -13,5 +13,6 @@ CREATE TABLE `dict` (
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COMMENT='字典';
 
 
-insert  into `dict`(`id`,`dict_type`,`dict_key`,`dict_value`,`remark`,`modified_time`,`created_time`,`yn`) values (1,6,'title','Spring Boot Demo',NULL,'2020-04-22
+insert  into `dict`(`id`,`dict_type`,`dict_key`,`dict_value`,`remark`,`modified_time`,`created_time`,`yn`) values (1,6,'title','Spring Boot Demo',NULL,'2020-04-25 18:58:48','2020-04-25 18:58:48',1);
+
 
