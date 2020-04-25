@@ -11,6 +11,7 @@
 
     <modules>
         <module>spring-boot-demo</module>
+        <module>spring-boot-demo-api</module>
         <module>spring-boot-dubbo-consumer</module>
     </modules>
     <properties>
@@ -24,7 +25,6 @@
         <!---->
         <spring.boot.version>2.2.6.RELEASE</spring.boot.version>
         <!---->
-        <mysql.version>8.0.19</mysql.version>
         <dubbo.spring.boot.version>2.7.6</dubbo.spring.boot.version>
         <mybatis.spring.boot.version>2.1.2</mybatis.spring.boot.version>
         <commons.text.version>1.8</commons.text.version>
@@ -36,10 +36,10 @@
             <!--项目内版本控制-->
             <dependency>
                 <groupId>com.zeroq6</groupId>
-                <artifactId>spring-boot-demo</artifactId>
+                <artifactId>spring-boot-demo-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
+            <!--spring boot依赖-->
             <dependency>
                 <!-- Import dependency management from Spring Boot -->
                 <groupId>org.springframework.boot</groupId>
@@ -48,11 +48,13 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!--dubbo-->
             <dependency>
                 <groupId>org.apache.dubbo</groupId>
                 <artifactId>dubbo-spring-boot-starter</artifactId>
                 <version>${dubbo.spring.boot.version}</version>
             </dependency>
+            <!--mybatis-->
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>

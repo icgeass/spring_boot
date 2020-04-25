@@ -38,7 +38,7 @@
 
         <dependency>
             <groupId>com.zeroq6</groupId>
-            <artifactId>spring-boot-demo</artifactId>
+            <artifactId>spring-boot-demo-api</artifactId>
         </dependency>
 
 

@@ -1,6 +1,6 @@
 package com.zeroq6.spring_boot.provider;
 
-import com.zeroq6.spring_boot.api.DemoServiceApi;
+import com.zeroq6.spring_boot_dubbo_demo_api.api.DemoServiceApi;
 import org.apache.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

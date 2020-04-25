@@ -8,7 +8,7 @@
         <version>0.0.1-SNAPSHOT</version>
         <!-- lookup parent from repository -->
         <!--如果是父子目录结构则不需要relativePath-->
-<!--        <relativePath/>-->
+        <!--        <relativePath/>-->
     </parent>
     <artifactId>spring-boot-demo</artifactId>
     <name>spring-boot-demo</name>
@@ -16,6 +16,10 @@
 
 
     <dependencies>
+        <dependency>
+            <groupId>com.zeroq6</groupId>
+            <artifactId>spring-boot-demo-api</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-freemarker</artifactId>
@@ -55,7 +59,7 @@
             </exclusions>
         </dependency>
 
-        <!---->
+        <!--工具类-->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-text</artifactId>

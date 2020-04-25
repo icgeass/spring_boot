@@ -1,7 +1,7 @@
 package com.zeroq6.spring_boot_dubbo_consumer.controller;
 
 
-import com.zeroq6.spring_boot.api.DemoServiceApi;
+import com.zeroq6.spring_boot_dubbo_demo_api.api.DemoServiceApi;
 import org.apache.dubbo.config.annotation.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
