@@ -28,7 +28,7 @@
         <dubbo.spring.boot.version>2.7.6</dubbo.spring.boot.version>
         <mybatis.spring.boot.version>2.1.2</mybatis.spring.boot.version>
         <commons.text.version>1.8</commons.text.version>
-        <fastjson.version>1.2.58</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
     </properties>
 
     <dependencyManagement>
